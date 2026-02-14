@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minecraft Web - Multiplayer</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Login Screen -->
+    <div id="loginScreen" class="screen">
+        <div class="login-container">
+            <h1>🎮 Minecraft Web</h1>
+            <div class="login-box">
+                <input type="text" id="playerName" placeholder="Dein Name" maxlength="20">
+                <div class="button-group">
+                    <button onclick="createRoom()" class="btn btn-primary">Neuen Raum erstellen</button>
+                    <button onclick="showJoinRoom()" class="btn btn-secondary">Raum beitreten</button>
+                </div>
+                <div id="joinRoomDiv" style="display: none;">
+                    <input type="text" id="roomCode" placeholder="Einladungscode" maxlength="6">
+                    <button onclick="joinRoom()" class="btn btn-success">Beitreten</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Game Screen -->
+    <div id="gameScreen" class="screen" style="display: none;">
+        <!-- HUD -->
+        <div id="hud">
+            <div class="hud-top">
+                <div class="room-info">
+                    <span>🚪 Raum-Code: <strong id="displayRoomCode"></strong></span>
+                    <button onclick="copyRoomCode()" class="btn-small">📋 Kopieren</button>
+                </div>
+                <div class="player-count">
+                    <span>👥 Spieler: <span id="playerCount">1</span></span>
+                </div>
+            </div>
+            
+            <!-- Block Selection -->
+            <div class="block-selector">
+                <div class="block-item" onclick="selectBlock('grass')" data-block="grass">
+                    <div class="block-preview grass-block"></div>
+                    <span>Gras</span>
+                </div>
+                <div class="block-item" onclick="selectBlock('dirt')" data-block="dirt">
+                    <div class="block-preview dirt-block"></div>
+                    <span>Erde</span>
+                </div>
+                <div class="block-item" onclick="selectBlock('stone')" data-block="stone">
+                    <div class="block-preview stone-block"></div>
+                    <span>Stein</span>
+                </div>
+                <div class="block-item" onclick="selectBlock('wood')" data-block="wood">
+                    <div class="block-preview wood-block"></div>
+                    <span>Holz</span>
+                </div>
+                <div class="block-item" onclick="selectBlock('sand')" data-block="sand">
+                    <div class="block-preview sand-block"></div>
+                    <span>Sand</span>
+                </div>
+                <div class="block-item" onclick="selectBlock('water')" data-block="water">
+                    <div class="block-preview water-block"></div>
+                    <span>Wasser</span>
+                </div>
+            </div>
+
+            <!-- Chat -->
+            <div class="chat-container">
+                <div id="chatMessages" class="chat-messages"></div>
+                <div class="chat-input-container">
+                    <input type="text" id="chatInput" placeholder="Nachricht eingeben..." maxlength="100">
+                    <button onclick="sendMessage()" class="btn-small">Senden</button>
+                </div>
+            </div>
+
+            <!-- Players List -->
+            <div class="players-list">
+                <h3>Spieler Online</h3>
+                <div id="playersList"></div>
+            </div>
+
+            <!-- Controls Info -->
+            <div class="controls-info">
+                <p><strong>Steuerung:</strong></p>
+                <p>Maus bewegen = Umsehen</p>
+                <p>Linksklick = Block entfernen</p>
+                <p>Rechtsklick = Block platzieren</p>
+                <p>WASD = Bewegen</p>
+                <p>Leertaste = Springen</p>
+                <p>Shift = Schneller laufen</p>
+            </div>
+        </div>
+
+        <!-- 3D Canvas -->
+        <canvas id="gameCanvas"></canvas>
+    </div>
+
+    <!-- Three.js Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/PointerLockControls.js"></script>
+    
+    <!-- Game Scripts -->
+    <script src="game.js"></script>
+    <script src="multiplayer.js"></script>
+</body>
+</html>

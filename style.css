@@ -1,0 +1,370 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow: hidden;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.screen {
+    width: 100vw;
+    height: 100vh;
+}
+
+/* Login Screen */
+#loginScreen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-container {
+    text-align: center;
+}
+
+.login-container h1 {
+    color: white;
+    font-size: 3em;
+    margin-bottom: 30px;
+    text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+}
+
+.login-box {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+    min-width: 400px;
+}
+
+.login-box input {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    font-size: 16px;
+    transition: border 0.3s;
+}
+
+.login-box input:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+.button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.btn {
+    padding: 15px 30px;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-primary {
+    background: #667eea;
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #5568d3;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+.btn-secondary {
+    background: #48bb78;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background: #38a169;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(72, 187, 120, 0.4);
+}
+
+.btn-success {
+    background: #f6ad55;
+    color: white;
+}
+
+.btn-success:hover {
+    background: #ed8936;
+    transform: translateY(-2px);
+}
+
+.btn-small {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    background: #667eea;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.btn-small:hover {
+    background: #5568d3;
+}
+
+#joinRoomDiv {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 2px solid #eee;
+}
+
+/* Game Screen */
+#gameScreen {
+    position: relative;
+}
+
+#gameCanvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+/* HUD */
+#hud {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+#hud > * {
+    pointer-events: auto;
+}
+
+.hud-top {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    right: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.room-info, .player-count {
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.room-info strong {
+    color: #48bb78;
+    font-size: 1.2em;
+}
+
+/* Block Selector */
+.block-selector {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 15px;
+    border-radius: 15px;
+}
+
+.block-item {
+    cursor: pointer;
+    text-align: center;
+    padding: 10px;
+    border-radius: 10px;
+    transition: all 0.3s;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.block-item:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-5px);
+}
+
+.block-item.selected {
+    background: rgba(102, 126, 234, 0.5);
+    border: 2px solid #667eea;
+}
+
+.block-preview {
+    width: 50px;
+    height: 50px;
+    margin: 0 auto 5px;
+    border-radius: 5px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.grass-block {
+    background: linear-gradient(to bottom, #7ec850 0%, #7ec850 70%, #8b6f47 70%);
+}
+
+.dirt-block {
+    background: #8b6f47;
+}
+
+.stone-block {
+    background: #808080;
+}
+
+.wood-block {
+    background: #8b4513;
+}
+
+.sand-block {
+    background: #f4a460;
+}
+
+.water-block {
+    background: #4a90e2;
+    opacity: 0.7;
+}
+
+.block-item span {
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+/* Chat */
+.chat-container {
+    position: absolute;
+    bottom: 120px;
+    left: 20px;
+    width: 350px;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.chat-messages {
+    height: 200px;
+    overflow-y: auto;
+    padding: 10px;
+    color: white;
+    font-size: 14px;
+}
+
+.chat-message {
+    margin-bottom: 8px;
+    padding: 5px;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.chat-message .player-name {
+    font-weight: bold;
+    color: #48bb78;
+}
+
+.chat-message.system {
+    color: #f6ad55;
+    font-style: italic;
+}
+
+.chat-input-container {
+    display: flex;
+    padding: 10px;
+    gap: 5px;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.chat-input-container input {
+    flex: 1;
+    padding: 8px;
+    border: none;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.9);
+}
+
+/* Players List */
+.players-list {
+    position: absolute;
+    top: 80px;
+    right: 20px;
+    width: 200px;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    padding: 15px;
+    color: white;
+}
+
+.players-list h3 {
+    margin-bottom: 10px;
+    font-size: 16px;
+    border-bottom: 2px solid #667eea;
+    padding-bottom: 5px;
+}
+
+.player-item {
+    padding: 8px;
+    margin-bottom: 5px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.player-item::before {
+    content: '👤';
+}
+
+/* Controls Info */
+.controls-info {
+    position: absolute;
+    top: 80px;
+    left: 20px;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 12px;
+    max-width: 200px;
+}
+
+.controls-info p {
+    margin-bottom: 5px;
+}
+
+.controls-info strong {
+    color: #48bb78;
+}
+
+/* Scrollbar */
+.chat-messages::-webkit-scrollbar {
+    width: 8px;
+}
+
+.chat-messages::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
+
+.chat-messages::-webkit-scrollbar-thumb {
+    background: rgba(102, 126, 234, 0.5);
+    border-radius: 10px;
+}
+
+.chat-messages::-webkit-scrollbar-thumb:hover {
+    background: rgba(102, 126, 234, 0.7);
+}
