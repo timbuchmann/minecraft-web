@@ -181,6 +181,18 @@ function removeBlock(block, sync = true) {
     }
 }
 
+// Helper functions for multiplayer
+function placeBlockAt(x, y, z, type, sync = true) {
+    addBlock(x, y, z, type, sync);
+}
+
+function removeBlockAt(x, y, z, sync = true) {
+    const block = world.find(b => b.userData.x === x && b.userData.y === y && b.userData.z === z);
+    if (block) {
+        removeBlock(block, sync);
+    }
+}
+
 // Mouse Interaction
 function onMouseDown(event) {
     if (!controls.isLocked) return;
@@ -325,12 +337,21 @@ function generateRoomCode() {
 function startGame() {
     document.getElementById('loginScreen').style.display = 'none';
     document.getElementById('gameScreen').style.display = 'block';
-    document.getElementById('displayRoomCode').textContent = roomCode;
     
     initGame();
     initMultiplayer();
     
-    addChatMessage('System', `Willkommen ${playerName}! Raum-Code: ${roomCode}`, true);
+    // Create or join room after multiplayer is initialized
+    setTimeout(() => {
+        if (isHost) {
+            const code = window.createRoom();
+            addChatMessage('System', `Willkommen ${playerName}! Raum erstellt!`, true);
+        } else {
+            window.joinRoom(roomCode);
+            addChatMessage('System', `Willkommen ${playerName}! Verbinde mit Raum...`, true);
+        }
+    }, 500);
+    
     selectBlock('grass');
 }
 
